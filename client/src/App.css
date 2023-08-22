@@ -1,0 +1,80 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+.peopleList {
+  /* display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: auto;
+
+  background-color: rgb(63, 94, 84); */
+  display: flex;
+  flex-wrap: wrap;
+}
+.peopleList>div {
+  flex-basis: calc(33.33% - 20px);
+  min-width: calc(33.33% - 20px); /* Ensure consistent width */
+  margin: 10px;
+  /* Optional styling */
+  border: 1px solid black;
+  padding: 10px;
+  box-sizing: border-box;
+ 
+}
+.pageNumbers{
+  text-align: center;
+
+  background-color: rgba(252, 252, 252, 0.818);
+  padding: 5px;
+  border-radius: 5px;
+
+}
+input{
+  height: 31px;
+  margin-right: 5px;
+}
+.people {
+  color: white;
+  border: 2px solid white;
+  flex: 0 0 20%;
+  margin: 5px;
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
