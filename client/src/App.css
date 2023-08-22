@@ -61,8 +61,10 @@
 
 }
 input{
-  height: 31px;
+  height: 32px;
   margin-right: 5px;
+  text-indent: 10px
+
 }
 .people {
   color: white;

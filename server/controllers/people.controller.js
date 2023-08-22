@@ -1,4 +1,3 @@
-//const expressJwt = require("express-jwt");
 const config = require("../config/config");
 const fetch = require("node-fetch");
 const fs = require("fs");
@@ -26,7 +25,8 @@ const getPeople = async (req, res) => {
 
     //calculating total page numbers
     const totalPage = Math.ceil(jsonData.length / 9);
-    console.log(totalPage);
+    const totalDataFound = jsonData.length;
+
     //handling pagination
     jsonData =
       req.query.page && req.query.page !== "undefined" &&totalPage>1
@@ -44,6 +44,7 @@ const getPeople = async (req, res) => {
     res.status(200).json({
       success: true,
       totalPage,
+      totalDataFound,
       data: jsonData,
     });
   } catch (err) {
@@ -64,7 +65,7 @@ const createFileWithData = async (req, res) => {
         .then((response) => response?.json())
         .then((json) => {
           resultByPage.push(...json?.results);
-          i === 1 && console.log(a);
+          console.log("checking page "+i)
         });
     }
 
@@ -101,7 +102,7 @@ const createFileWithData = async (req, res) => {
       }
     );
 
-    return res.status(200).json({ success: true, count: a.length, data: a });
+    return res.status(200).json({ success: true, count: jsonData.length, data: jsonData});
   } catch (err) {
     console.log(err);
     res.status(400).json({ success: false, message: "Something wrong!" });

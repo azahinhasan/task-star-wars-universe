@@ -9,6 +9,8 @@ function App() {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [totalPage, setTotalPage] = useState(1);
+  const [totalDataFound, setTotalDataFound] = useState(0);
+  
 
   const searchData = (page) => {
     console.log("page");
@@ -20,6 +22,7 @@ function App() {
       if (res.success) {
         setPeople(res.data);
         setTotalPage(res.totalPage);
+        setTotalDataFound(res.totalDataFound);
       }
       setLoading(false);
     });
@@ -27,16 +30,6 @@ function App() {
 
   useEffect(() => {
     searchData();
-    // setLoading(true);
-    // peopleSearchByName("",1).then((res) => {
-    //   console.log(res);
-    //   if(res.success){
-    //     setPeople(res.data);
-    //     setTotalPage(res.totalPage)
-    //     console.log(res)
-    //   }
-    //   setLoading(false);
-    // });
   }, []);
 
   console.log(people);
@@ -50,6 +43,8 @@ function App() {
       />
       <button onClick={() => searchData()}>Search</button>
       <br />
+      <h3>Total Data Found - {totalDataFound}</h3>
+  
       <div className="peopleList">
         {people?.length > 0 && !loading ? (
           people?.map((elem) => {

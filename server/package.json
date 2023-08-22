@@ -4,7 +4,7 @@
   "description": "explore the characters of the Star Wars universe",
   "main": "server.js",
   "scripts": {
-    "dev": "NODE_ENV=dev nodemon --legacy-watch server.js",
+    "dev": "nodemon --legacy-watch server.js",
     "docs": "./node_modules/.bin/jsdoc -c jsdoc.json"
   },
   "author": "",
@@ -29,9 +29,5 @@
     "nodemon": "2.0.22",
     "winston": "3.8.2",
     "winston-daily-rotate-file": "4.7.1"
-  },
-  "engines": {
-    "node": "16.17.0",
-    "npm": "8.15.0"
   }
 }
