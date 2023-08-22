@@ -7,9 +7,9 @@ export default defineConfig({
     },
     baseUrl: "http://localhost:3004",
     specPattern: [
-      "cypress/e2e/test1.searchByName.test.js",
-      "cypress/e2e/test2.changePage.test.js",
-      "cypress/e2e/test3.searchByNameChangePage.test.js",
+      "cypress/e2e/searchByName.test.js",
+      "cypress/e2e/changePage.test.js",
+      "cypress/e2e/searchByNameChangePage.test.js",
     ],
   },
 });
