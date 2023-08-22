@@ -38,10 +38,11 @@ function App() {
       <h2>The characters of the Star Wars universe</h2>
 
       <input
+        name="search"
         onChange={(e) => setSearch(e.target.value)}
         placeholder="Character name"
       />
-      <button onClick={() => searchData()}>Search</button>
+      <button name="searchBtn" onClick={() => searchData()}>Search</button>
       <br />
       <h3>Total Data Found - {totalDataFound}</h3>
   
@@ -80,6 +81,7 @@ function App() {
       {!loading && (
         <div className="pageNumbers">
           <Pagination
+            name=""
             style={{ display: "inline-block" }}
             count={totalPage}
             page={page}
