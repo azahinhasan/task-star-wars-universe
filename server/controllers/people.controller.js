@@ -80,7 +80,7 @@ const createFileWithData = async (req, res) => {
           (await fetch(jsonData[i].films[j], {
             method: "GET",
           })
-            .then((response) => response.json())
+            .then((response) => response?.json())
             .then((json) => {
               tempFilms.push(json);
               flag = true;

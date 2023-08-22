@@ -1,4 +1,3 @@
-const mongoose = require("mongoose");
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
@@ -45,4 +44,4 @@ app.listen(config.PORT, () => {
   console.log(`Example app listening at http://localhost:${config.PORT}`);
 });
 
-module.exports = { app, server, mongoose };
+module.exports = { app, server };
