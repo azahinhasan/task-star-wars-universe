@@ -1,4 +1,4 @@
-/// <reference types="cypress" />
+/* eslint-disable no-undef */
 
 describe("This test case will show or return searched result", () => {
   it("Search with name", () => {

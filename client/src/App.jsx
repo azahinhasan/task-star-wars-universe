@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import { allPeople, peopleSearchByName } from "./api";
+import { peopleSearchByName } from "./api";
 import Pagination from "@mui/material/Pagination";
 
 function App() {

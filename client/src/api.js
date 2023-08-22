@@ -1,21 +1,3 @@
-// import dotenv from "dotenv";
-// dotenv.config();
-
-
-const allPeople = async () => {
-    try {
-        let response = await fetch(`/api/people`, {
-            method: "GET",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-            },
-        });
-        return await response.json();
-    } catch (err) {
-        console.log(err);
-    }
-};
 
 const peopleSearchByName = async (name,page) => {
   try {
@@ -34,6 +16,5 @@ const peopleSearchByName = async (name,page) => {
 
 
 export {
-  allPeople,
   peopleSearchByName
 };

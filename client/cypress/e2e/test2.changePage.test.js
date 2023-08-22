@@ -1,4 +1,4 @@
-/// <reference types="cypress" />
+/* eslint-disable no-undef */
 
 describe("This test case will show data by pages", () => {
   it("Change data by page number", () => {
