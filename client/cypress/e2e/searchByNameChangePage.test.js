@@ -8,7 +8,7 @@ describe("This test case will show or return searched result after getting data 
      
       cy.visit("/");
       cy.wait(1500); 
-      cy.get("[name=search]").should("exist").type("o");
+      cy.get("[name=search]").should("exist").type("c");
       cy.wait(2500); 
       cy.get("[name=searchBtn]").should("exist").click();
       cy.wait(1500);
