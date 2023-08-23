@@ -13,14 +13,13 @@ function App() {
   
 
   const searchData = (page) => {
-    console.log("page");
     //search &&
     setLoading(true);
     // search &&
     peopleSearchByName(search, page).then((res) => {
       setPage(page)
       if (res.success) {
-        setPeople(res.data);
+        setPeople(res.characters);
         setTotalPage(res.totalPage);
         setTotalDataFound(res.totalDataFound);
       }
@@ -32,7 +31,6 @@ function App() {
     searchData();
   }, []);
 
-  console.log(people);
   return (
     <>
       <h2>The characters of the Star Wars universe</h2>
@@ -42,9 +40,10 @@ function App() {
         onChange={(e) => setSearch(e.target.value)}
         placeholder="Character name"
       />
+      
       <button name="searchBtn" onClick={() => searchData()}>Search</button>
       <br />
-      <h3>Total Data Found - {totalDataFound}</h3>
+      <h3>Total Data Found - {totalDataFound||0}</h3>
   
       <div className="peopleList">
         {people?.length > 0 && !loading ? (
@@ -56,10 +55,20 @@ function App() {
                 <div>Skin color: {elem.skin_color}</div>
                 <div>Height: {elem.height}</div>
                 <div>Eye color: {elem.eye_color}</div>
+                <hr/>
+                <div><b style={{textDecoration:'underline'}}>HomeWorld</b>
+                  <div>Name: {elem.homeworld?.name}</div>
+                  <div>Rotation period: {elem.homeworld?.rotation_period}</div>
+                  <div>Gravity: {elem.homeworld?.gravity}</div>
+                  <div>Terrain: {elem.homeworld?.terrain}</div>
+                  <div>Population: {elem.homeworld?.population}</div>
+                </div>
+                <hr/>
+                <hr/>
                 {elem.films.length > 0 && (
                   <div>
-                    <b>Films</b>
-                    <hr/>
+                    <b style={{textDecoration:'underline'}}>Films</b>
+                    
                     {elem.films?.map((el) => {
                       return <div key={el.title}>
                        <div>Title: {el?.title||"unknown"}</div>

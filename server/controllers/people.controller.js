@@ -1,8 +1,7 @@
 const config = require("../config/config");
 const fetch = require("node-fetch");
 const fs = require("fs");
-let peopleData = require("../extra_character.json");
-
+let peopleData = require("../extra_character");
 
 const getPeople = async (req, res) => {
   try {
@@ -20,7 +19,9 @@ const getPeople = async (req, res) => {
       );
     }
     if (jsonData.length === 0) {
-      return res.status(404).json({ success: false, message: "No data found" });
+      return res
+        .status(404)
+        .json({ success: true, message: "No data found", characters: [] });
     }
 
     //calculating total page numbers
@@ -29,7 +30,7 @@ const getPeople = async (req, res) => {
 
     //handling pagination
     jsonData =
-      req.query.page && req.query.page !== "undefined" &&totalPage>1
+      req.query.page && req.query.page !== "undefined" && totalPage > 1
         ? jsonData.slice(
             9 *
               (parseInt(req.query.page) > 0 ? parseInt(req.query.page) - 1 : 0),
@@ -45,13 +46,14 @@ const getPeople = async (req, res) => {
       success: true,
       totalPage,
       totalDataFound,
-      data: jsonData,
+      characters: jsonData,
     });
   } catch (err) {
     console.log(err);
     res.status(400).json({ success: false, message: "Something wrong!" });
   }
 };
+
 
 const createFileWithData = async (req, res) => {
   try {
@@ -65,19 +67,21 @@ const createFileWithData = async (req, res) => {
         .then((response) => response?.json())
         .then((json) => {
           resultByPage.push(...json?.results);
-          console.log("checking page "+i)
+          console.log("checking page " + i);
         });
     }
 
-    console.log("--populating with films data--");
     jsonData = resultByPage;
+
     for (let i = 0; i < jsonData.length; i++) {
+      //populating with films data
+      console.log("--populating with films data--");
       let tempFilms = [];
       console.log(jsonData[i].films, "films of data-" + i);
       let flag = false;
       for (let j = 0; j < jsonData[i].films?.length; j++) {
         typeof jsonData[i].films[j] === "string" &&
-          (await fetch(jsonData[i].films[j], {
+          (await fetch(jsonData[i].films[j]?.slice(0,-1), {
             method: "GET",
           })
             .then((response) => response?.json())
@@ -87,6 +91,18 @@ const createFileWithData = async (req, res) => {
             }));
       }
       if (flag) jsonData[i].films = tempFilms;
+
+      console.log("--populating with home-world data--");
+      console.log(jsonData[i]?.homeworld);
+      //populating with  home-world data
+      typeof jsonData[i].homeworld === "string" &&
+        (await fetch(jsonData[i].homeworld?.slice(0,-1), {
+          method: "GET",
+        })
+          .then((response) => response?.json())
+          .then((json) => {
+            jsonData[i].homeworld = json;
+          }));
     }
 
     //creating and saving data in json file
@@ -102,7 +118,9 @@ const createFileWithData = async (req, res) => {
       }
     );
 
-    return res.status(200).json({ success: true, count: jsonData.length, data: jsonData});
+    return res
+      .status(200)
+      .json({ success: true, count: jsonData.length, characters: jsonData });
   } catch (err) {
     console.log(err);
     res.status(400).json({ success: false, message: "Something wrong!" });
