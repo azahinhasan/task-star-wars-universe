@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon --legacy-watch server.js",
     "docs": "./node_modules/.bin/jsdoc -c jsdoc.json",
-    "test": "jest",
+    "test": "jest --forceExit",
     "both-end": "concurrently \"nodemon server.js\" \"cd .. && cd client && npm run dev\""
   },
   "author": "",
