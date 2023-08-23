@@ -6,16 +6,14 @@ let peopleData = require("../extra_character");
 const getPeople = async (req, res) => {
   try {
     //sorting data my name
-    let jsonData = peopleData.sort((a, b) => a.name.localeCompare(b.name));
+    let jsonData = peopleData.sort((a, b) => a.name.localeCompare(b.name)); //sort by name
 
     //searching by name
-    if (req.query.name !== "undefined") {
+    if (req.query.name && req.query.name !== "undefined") {
       const regex = new RegExp(
-        req.query.name?.replaceAll(" ", "").replaceAll("%20", "").toLowerCase(),
-        "g"
-      );
+        req.query.name?.replaceAll(" ", "").replaceAll("%20", "").toLowerCase(),"g"); //for user given name removing all white spaces and making full string lowerCase
       jsonData = jsonData.filter((el) =>
-        el.name.replaceAll(" ", "").toLowerCase().match(regex)
+        el.name.replaceAll(" ", "").toLowerCase().match(regex) //filtering or searching our match data with name.
       );
     }
     if (jsonData.length === 0) {
@@ -25,20 +23,15 @@ const getPeople = async (req, res) => {
     }
 
     //calculating total page numbers
-    const totalPage = Math.ceil(jsonData.length / 9);
+    const totalPage = Math.ceil(jsonData.length / 9); //dividing by 9 coz there will be max of 9 data in every page
     const totalDataFound = jsonData.length;
 
     //handling pagination
     jsonData =
       req.query.page && req.query.page !== "undefined" && totalPage > 1
-        ? jsonData.slice(
-            9 *
-              (parseInt(req.query.page) > 0 ? parseInt(req.query.page) - 1 : 0),
-            9 *
-              (parseInt(req.query.page) > 0
-                ? parseInt(req.query.page) - 1
-                : 0) +
-              9
+        ? jsonData.slice(9*(parseInt(req.query.page) > 0 ? parseInt(req.query.page) - 1 : 0), 
+            9*(parseInt(req.query.page) > 0
+                ? parseInt(req.query.page) - 1: 0) + 9
           )
         : (jsonData = jsonData.slice(0, 9));
 

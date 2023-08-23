@@ -8,7 +8,7 @@ const server = http.Server(app);
 
 // Config
 const config = require("./config/config");
-// const winston = require("./config/winston");
+
 
 // Import Routes
 const peopleRoutes = require("./routes/people.routes");

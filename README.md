@@ -14,6 +14,8 @@
 
 1. Go to the server directory, open the terminal, and run this command- `npm run dev`. <br/>It will run our backend. Users can access the server from http://127.0.0.1:5004 or http://localhost:5004
 2. Go to the client directory, open the terminal, and run this command- `npm run dev`. <br/>It will run our frontend. Users can access the client from http://127.0.0.1:3004 or http://localhost:3004. Make sure server is running otherwise will not find any data.
+##### or
+1. User can run/start server and client together. For that, first go to any of those directory server or client,open the terminal, and run this command- `npm run both-end` . It will run both end together.
 
 #### How to use and some of the functionality of the app.
 
@@ -34,7 +36,7 @@ Make sure 'Basic Setup' steps are completed.
   2. Go to the client directory, open the terminal and run this command: `npm run test`.
   3. After step 2 there will be a new window open from there select "E2E Testing". 
   4. Then choose a browser(Chrome is suggested). Then press the button "Start E2E Testing in browser_name".
-  5. Another new window will be open now from there click which test you want to run. Such as click on "searchByName.test.js". It will automatically run the test.
+  5. Another new window will be open now from there click which test want to run. Such as click on "searchByName.test.js". It will automatically run the test.
   6. For terminating: close the windows or press Ctrl+c in the running terminal.<br/>
   `User can find the test case code in this directory: client/cypress/e2e`
 - ##### Backend unit testing with Jest
@@ -48,20 +50,24 @@ Make sure 'Basic Setup' steps are completed.
 
 ### What I used to build this app.
 - ##### Frontend
-  - React js : Used react for making frontends. To create the base of the frontend I used 'vite' instead of `npx create-react-app`. Because vite is more optimized for speed and can provide faster build times. It's helps in development when I needs to see the changes in real-time. 
-  - Material ui : Used Material ui for pagination and for some UI parts.
-  - CSS : Used CSS for styles.
-  - Cypress: Used cypress for e2e testing.
+  - react js : Used react for making frontends. To create the base of the frontend I used 'vite' instead of `npx create-react-app`. Because vite is more optimized for speed and can provide faster build times. It's helps in development when I needs to see the changes in real-time. 
+  - material ui : Used Material ui for pagination and for some UI parts.
+  - css : Used CSS for styles.
+  - cypress: Used cypress for e2e testing.
 
 - ##### Backend
-  - Express js: User Express as a backed library. I choose express because it provide high-performance and low-overhead web framework for Node.js, known for its speed and efficiency in handling web requests.
-  - FS module: Use this module to create our `.json` file.
-  - Jest: Use jest for unit testing.
+  - express js: User Express as a backed library. I choose express because it provide high-performance and low-overhead web framework for Node.js, known for its speed and efficiency in handling web requests.
+  - fs module: Use this module to create our `.json` file.
+  - node-fetch : Use this module to fetch data from SWAPI in our node js.
+  - dotenv: This module loads environment variables from a .env file into process.env.
+  - body-parser: This module used to process the data which is sent by client in an HTTP request body.
+  - nodemon: This one automatically restarts our node app when it's detects any changes in our code base. Help to develop faster.
+  - jest: Use jest for unit testing.
 
 ---
 
 ### What are the problems I faced and how to overcomes them.
 - For backend at first I fetch only characters data page by page from SWAPI and store them in `.json` file. Because there are no any other option for filtering data by name. 
-- After overcoming this I am facing new problem which is populating data of films and home-world.When fetching data by `/api/people?name=Ack&page=1` api it was taking too much time to get the full data because populating was taking too long.And the reason is each of films and homeworld info are coming from separate  APIs. So add some more steps in `createFileWithData` function you can find it in `people.controller.js`. So now this full function fetch all data for characters and populating with films and homeworld data. Then save in the `.json` file. That's how I make the get data action more faster.
+- After overcoming this I am facing new problem which is populating data of films and home-world.When fetching data by such as `/api/people?name=Ack&page=1` api it was taking too much time to get the full data because populating was taking too long.And the reason is each of films and homeworld info are coming from separate  APIs. So add some more steps in `createFileWithData` function user can find it in `people.controller.js`. So now this full function fetch all data for characters and populating with films and homeworld data. Then save in the `.json` file. That's how I make the get data action more faster.
 
  
