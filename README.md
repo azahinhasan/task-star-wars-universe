@@ -1,23 +1,23 @@
 # Task Star Wars Universe Characters
+Users can explore the characters of the Star Wars universe. Can find their information such as: HomeWorld,Films,Gender and more.
+## Some Instructions 
 
-### Some Instructions 
+### Basic Setup
 
-#### Basic Setup
-
-1.  Make sure system have node.js installed(suggested node version is v16.17.0) if not please download form nodejs website and install. Also user can download and install NVM in there system. Which will help to switch between different versions of node.js easily.
+1.  Make sure system have node.js installed(the suggested node version is v16.17.0) if not please download from nodejs website and install it.<br/> Also, users can download and install NVM in their system. Which will help to switch between different versions of node.js easily.
 2.  Clone this repository.
 3.  Now go to the server directory, open the terminal, and run this command- `npm install`.
 4.  Same as step 2 go to the client directory, open the terminal, and run this command- `npm install`.<br/>
     we are done with the basic setup now let's run this app.
 
-#### Step for running the app.
+### Step for running the app.
 
-1. Go to the server directory, open the terminal, and run this command- `npm run dev`. <br/>It will run our backend. Users can access the server from http://127.0.0.1:5004 or http://localhost:5004. And if anything running on that port(`:5004`) user have to terminate it or change the port from `server/config`.
-2. Go to the client directory, open the terminal, and run this command- `npm run dev`. <br/>It will run our frontend. Users can access the client from http://127.0.0.1:3004 or http://localhost:3004. Make sure the server is running otherwise will not find any data. And if anything running on that port(`:3004`) user have to terminate it or change the port from command which will be founded in `client/package.json`.
+1. Go to the server directory, open the terminal, and run this command- `npm run dev`. <br/>It will run our backend. Users can access the server from http://127.0.0.1:5004 or http://localhost:5004. And if anything runs on that port(`:5004`) user has to terminate it or change the port from `server/config`.
+2. Go to the client directory, open the terminal, and run this command- `npm run dev`. <br/>It will run our frontend. Users can access the client from http://127.0.0.1:3004 or http://localhost:3004. Make sure the server is running otherwise will not find any data. And if anything runs on that port(`:3004`) user has to terminate it or change the port from the command which will be found in `client/package.json`.
 ##### or
-1. The user can run/start the server and client together. For that first, go to any of those directory server or client, open the terminal, and run this command- `npm run both-end`. It will run both end together.
+1. The user can run/start the server and client together. For that first, go to any of those directory server or client, open the terminal, and run this command- `npm run both-end`. It will run both ends together.
 
-#### How to use and some of the functionality of the app.
+### How to use and some of the functionality of the app.
 Make sure the 'Basic Setup' steps are completed.
 - ##### Frontend
   1. By default, there will be all the characters(each character's data contains info of their name, gender, skin color, height, eye color,homeworld, and list of films) from Star Wars will be loaded. Each page contains max of 9 characters information. Users can access other data by changing the page from pagination. And the characters are sorted by their name.
@@ -25,11 +25,11 @@ Make sure the 'Basic Setup' steps are completed.
 - ##### Backend
   1. `/api/people` : This API returns an object if success which is containing totalPage(help to client-side how many pages are there),totalDataFound(number of total data), and characters(array of character objects where the data are sorted by name). This API fetches data of characters from the `extra_character.json` file. Without any query, it will return only character data for the first page which will be 9 data. Users have to provide the following queries to get data by page and name:<br/>
   -- `/api/people?page=2`[get data by page] - there are total of 10 pages.<br/>
-  -- `/api/people?name=Ackbar`[get data by name] - this one will return matched characters. <br/> Important note: If the user doesn't provide a page number in queries and the system found matches data more than 9 then it will return only the first 9 data for page 1. So using the API with both queries is highly suggested such as: `/api/people?name=Ack&page=1`. <br/>
+  -- `/api/people?name=Ackbar`[get data by name] - this one will return matched characters. <br/> Important note: If the user doesn't provide a page number in queries and the system finds matches data more than 9 then it will return only the first 9 data for page 1. So using the API with both queries is highly suggested such as: `/api/people?name=Ack&page=1`. <br/>
   Also, if the user searches by data less than 9 but the page number is given more than 1 it will return data for page 1. Coz page number of more than 1 for this result is invalid.<br/>
   1. `/api/createDataFile`: This API will fetch all data from `https://swapi.dev/api/people` page by page because SWAPI does not provide all data in a single request. After fetching all data this function will populate films and homeworld of all individual characters using their `https://swapi.dev/api/films/:id` and `https://swapi.dev/api/planets/:id` APIs. After doing those steps function will save them in `extra_character.json` file which is role as cache file. <br/>Important note: I already created the file in the root of the server directory. If users want to test it then they have to delete all data from the file and call this API. It will take too long to finish all those steps. And if user delete the `extra_character.json` file from the root and can't be restored they can find another one in `server/back-ups` folder.
 
-#### How to run unit and e2e test cases.
+### How to run unit and e2e test cases.
 Make sure the 'Basic Setup' steps are completed.
 - ##### Frontend e2e testing with Cypress
   1. Make sure the frontend and backend both are running. If not running follow the steps of the 'Step for running the app' part to run them first.
@@ -48,7 +48,7 @@ Make sure the 'Basic Setup' steps are completed.
 
 ---
 
-### What I have used to build this app.
+## What I have used to build this app.
 - ##### Frontend
   - react js : Used react for making frontends. To create the base of the frontend I used 'vite' instead of `npx create-react-app`. Because vite is more optimized for speed and can provide faster build times. It's helps in development when I need to see the changes in real-time. 
   - material ui : Used Material ui for pagination and for some UI parts.
@@ -66,7 +66,7 @@ Make sure the 'Basic Setup' steps are completed.
 
 ---
 
-### What are the problems I faced and how to overcome them.
+## What are the problems I faced and how to overcome them.
 - For the backend at first, I fetch only characters data page by page from SWAPI and store them in `.json` file. Because there are no other options for filtering data by name. 
 - After overcoming this I am facing a new problem which is populating data of films and home-world.When fetching data by such as `/api/people?name=Ack&page=1` API it was taking too much time to get the full data because populating was taking too long. And the reason is each of the films and homeworld info are coming from separate  APIs. So add some more steps in `createFileWithData` function user can find it in `people.controller.js`. So now this full function fetches all data for characters and populates with films and homeworld data. Then save in the `.json` file. That's how I make the process of get data more faster.
 
